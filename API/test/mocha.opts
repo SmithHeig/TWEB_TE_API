@@ -1,0 +1,2 @@
+--require ./test/chai-config.js
+--exit

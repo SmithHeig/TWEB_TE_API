@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing graphql resquest user MUTATION tokens Testing login(email: String!, password:String!) should fail during login because incorrect password received 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: Received password is not correct!],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION tokens Testing login(email: String!, password:String!) should fail during login because unknown email received 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: There is no user corresponding to the email "unknown@mail.com"],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION tokens Testing signUpAsUser(newUser: UserInputAdd!) should create a new user and return a token 1`] = `
+Object {
+  "data": Object {
+    "user": Object {
+      "email": "ben@schop.ch",
+      "firstname": "benoit",
+      "lastname": "schop",
+    },
+  },
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION tokens Testing signUpAsUser(newUser: UserInputAdd!) should fail creating a new user and returning a token because missing mendatory information (email) 1`] = `
+Object {
+  "errors": Array [
+    [GraphQLError: Variable "$user" got invalid value { firstname: "benoit", lastname: "schop", password: "abcd1234" }; Field value.email of required type String! was not provided.],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION tokens Testing signUpAsUser(newUser: UserInputAdd!) should fail creating a new user and returning a token because missing mendatory information (firstname) 1`] = `
+Object {
+  "errors": Array [
+    [GraphQLError: Variable "$user" got invalid value { lastname: "schop", email: "ben@schop.ch", password: "abcd1234" }; Field value.firstname of required type String! was not provided.],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION tokens Testing signUpAsUser(newUser: UserInputAdd!) should fail creating a new user and returning a token because missing mendatory information (lastname) 1`] = `
+Object {
+  "errors": Array [
+    [GraphQLError: Variable "$user" got invalid value { firstname: "benoit", email: "ben@schop.ch", password: "abcd1234" }; Field value.lastname of required type String! was not provided.],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION tokens Testing signUpAsUser(newUser: UserInputAdd!) should fail creating a new user and returning a token because missing mendatory information (password) 1`] = `
+Object {
+  "errors": Array [
+    [GraphQLError: Variable "$user" got invalid value { firstname: "benoit", lastname: "schop", email: "ben@schop.ch" }; Field value.password of required type String! was not provided.],
+  ],
+}
+`;

@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing addPostOfUser(post: PostInputAdd!) should fail adding a new post because invalid userId received (too long) 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: posts validation failed: userId: Cast to ObjectID failed for value "abcdefabcdefabcdefabcdefabcdef" at path "userId"],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing addPostOfUser(post: PostInputAdd!) should fail adding a new post because invalid userId received (too short) 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: posts validation failed: userId: Cast to ObjectID failed for value "abcdef" at path "userId"],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing addPostOfUser(post: PostInputAdd!) should fail adding a new post because missing mendatory information (text) 1`] = `
+Object {
+  "errors": Array [
+    [GraphQLError: Variable "$post" got invalid value { userId: "abcdefabcdefabcdefabcdefabcdef" }; Field value.text of required type String! was not provided.],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing addPostOfUser(post: PostInputAdd!) should fail adding a new post because missing mendatory information (userId) 1`] = `
+Object {
+  "errors": Array [
+    [GraphQLError: Variable "$post" got invalid value { text: "Ceci est un nouveau post." }; Field value.userId of required type ID! was not provided.],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing addPostOfUser(post: PostInputAdd!) should fail adding a new post because unknown userId received 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: The given userId (abcdefabcdefabcdefabcdef) doesn’t exist in the database!],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing addPostOfUser(post: PostInputAdd!) should fail adding a post because not authenticated 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: Sorry, you need to be authenticated to do that.],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing addPostOfUser(post: PostInputAdd!) should fail adding a post because not authenticated as yourself 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: You can't modify information of another user than yourself!],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing deletePostOfUser(userId: ID!, postId: ID!) should delete a post 1`] = `
+Object {
+  "data": Object {
+    "deletePostOfUser": Object {
+      "text": "Ceci est un post créé par Benoît Schöpfli.",
+      "user": Object {
+        "email": "benoit@schopfli.ch",
+        "firstname": "Benoît",
+        "lastname": "Schöpfli",
+      },
+    },
+  },
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing deletePostOfUser(userId: ID!, postId: ID!) should fail deleting a post because invalid postId received (too long) 1`] = `
+Object {
+  "data": Object {
+    "deletePostOfUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: You can't modify information of another user than yourself!],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing deletePostOfUser(userId: ID!, postId: ID!) should fail deleting a post because invalid postId received (too short) 1`] = `
+Object {
+  "data": Object {
+    "deletePostOfUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: You can't modify information of another user than yourself!],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing deletePostOfUser(userId: ID!, postId: ID!) should fail deleting a post because invalid userId received (too long) 1`] = `
+Object {
+  "data": Object {
+    "deletePostOfUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: Received userId is invalid!],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing deletePostOfUser(userId: ID!, postId: ID!) should fail deleting a post because invalid userId received (too short) 1`] = `
+Object {
+  "data": Object {
+    "deletePostOfUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: Received userId is invalid!],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing deletePostOfUser(userId: ID!, postId: ID!) should fail deleting a post because unknown postId received 1`] = `
+Object {
+  "data": Object {
+    "deletePostOfUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: You can't modify information of another user than yourself!],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing deletePostOfUser(userId: ID!, postId: ID!) should fail deleting a post because unknown userId received 1`] = `
+Object {
+  "data": Object {
+    "deletePostOfUser": null,
+  },
+  "errors": Array [
+    [GraphQLError:   You can't modify information of another user than yourself!],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing deletePostOfUser(userId: ID!, postId: ID!) should not delete a post because not authenticated 1`] = `
+Object {
+  "data": Object {
+    "deletePostOfUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: Sorry, you need to be authenticated to do that.],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts MUTATION tokens Testing deletePostOfUser(userId: ID!, postId: ID!) should not delete a post because not authenticated as yourself 1`] = `
+Object {
+  "data": Object {
+    "deletePostOfUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: You can't modify information of another user than yourself!],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts QUERY tokens Testing postsOfUser(userId: ID!) should fail getting al posts of the user because invalid id received (too long) 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: Cast to ObjectId failed for value "abcdefabcdefabcdefabcdefabcdef" at path "userId" for model "posts"],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts QUERY tokens Testing postsOfUser(userId: ID!) should fail getting al posts of the user because invalid id received (too short) 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: Cast to ObjectId failed for value "abcdef" at path "userId" for model "posts"],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest posts QUERY tokens Testing postsOfUser(userId: ID!) should return an empty tab of post of the user because unknown userId received 1`] = `
+Object {
+  "data": Object {
+    "postsOfUser": Array [],
+  },
+}
+`;

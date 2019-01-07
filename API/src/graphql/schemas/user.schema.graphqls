@@ -1,0 +1,32 @@
+type Query {
+	users: [User!]!
+	user(userId: ID!) : User
+
+	# Retourne true si l'email reçu en paramètre peut être utilisé pour inscrire un nouveau membre. Retourne false si l'email re4u en paramètre est déjà utilisé.
+	checkIfEmailIsAvailable(email: String!): Boolean!
+}
+
+type Mutation {
+	updateUser(user: UserInputUpdate!): User
+	deleteUser(userId: ID!): User
+}
+
+type User {
+	id: ID!
+	firstname: String!
+	lastname: String!
+	email: String!
+}
+
+input UserInputAdd {
+	firstname: String!
+	lastname: String!
+	email: String!
+	password: String!
+}
+
+input UserInputUpdate {
+	id: ID!
+	firstname: String!
+	lastname: String!
+}

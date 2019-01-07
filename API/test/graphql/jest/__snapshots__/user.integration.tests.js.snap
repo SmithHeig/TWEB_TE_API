@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing graphql resquest user MUTATION user Testing deleteUser(userId: ID!) should delete a user 1`] = `
+Object {
+  "data": Object {
+    "deleteUser": Object {
+      "email": "benoit@schopfli.ch",
+      "firstname": "Benoît",
+      "lastname": "Schöpfli",
+    },
+  },
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION user Testing deleteUser(userId: ID!) should fail deleting a user because invalid id received (too long) 1`] = `
+Object {
+  "data": Object {
+    "deleteUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: Cast to ObjectId failed for value "abcdefabcdefabcdefabcdefabcdef" at path "_id" for model "users"],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION user Testing deleteUser(userId: ID!) should fail deleting a user because invalid id received (too short) 1`] = `
+Object {
+  "data": Object {
+    "deleteUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: Cast to ObjectId failed for value "abcdef" at path "_id" for model "users"],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION user Testing deleteUser(userId: ID!) should fail deleting a user because unknown id received 1`] = `
+Object {
+  "data": Object {
+    "deleteUser": null,
+  },
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION user Testing deleteUser(userId: ID!) should not delete a user because not authenticated 1`] = `
+Object {
+  "data": Object {
+    "deleteUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: Sorry, you need to be authenticated to do that.],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION user Testing deleteUser(userId: ID!) should not delete a user because not authenticated as yourself 1`] = `
+Object {
+  "data": Object {
+    "deleteUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: You can't modify information of another user than yourself!],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION user Testing updateUser(user: UserInputUpdate!) should fail updating a user because invalid id received (too long) 1`] = `
+Object {
+  "data": Object {
+    "updateUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: Cast to ObjectId failed for value "abcdefabcdefabcdefabcdefabcdef" at path "_id" for model "users"],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION user Testing updateUser(user: UserInputUpdate!) should fail updating a user because invalid id received (too short) 1`] = `
+Object {
+  "data": Object {
+    "updateUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: Cast to ObjectId failed for value "abcdef" at path "_id" for model "users"],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION user Testing updateUser(user: UserInputUpdate!) should fail updating a user because unknown id received 1`] = `
+Object {
+  "data": Object {
+    "updateUser": null,
+  },
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION user Testing updateUser(user: UserInputUpdate!) should not update a user because missing mendatory information (id) 1`] = `
+Object {
+  "errors": Array [
+    [GraphQLError: Variable "$user" got invalid value { firstname: "Antoine", lastname: "Rochaille" }; Field value.id of required type ID! was not provided.],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION user Testing updateUser(user: UserInputUpdate!) should not update a user because not authenticated 1`] = `
+Object {
+  "data": Object {
+    "updateUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: Sorry, you need to be authenticated to do that.],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION user Testing updateUser(user: UserInputUpdate!) should not update a user because not authenticated as yourself 1`] = `
+Object {
+  "data": Object {
+    "updateUser": null,
+  },
+  "errors": Array [
+    [GraphQLError: You can't modify information of another user than yourself!],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user MUTATION user Testing updateUser(user: UserInputUpdate!) should update a user 1`] = `
+Object {
+  "data": Object {
+    "updateUser": Object {
+      "email": "benoit@schopfli.ch",
+      "firstname": "Antoine",
+      "lastname": "Rochaille",
+    },
+  },
+}
+`;
+
+exports[`Testing graphql resquest user QUERY user Testing user(userId: ID!) should fail getting a user by id because invalid id received (too long) 1`] = `
+Object {
+  "data": Object {
+    "user": null,
+  },
+  "errors": Array [
+    [GraphQLError: Cast to ObjectId failed for value "abcdefabcdefabcdefabcdefabcdef" at path "_id" for model "users"],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user QUERY user Testing user(userId: ID!) should fail getting a user by id because invalid id received (too short) 1`] = `
+Object {
+  "data": Object {
+    "user": null,
+  },
+  "errors": Array [
+    [GraphQLError: Cast to ObjectId failed for value "abcdef" at path "_id" for model "users"],
+  ],
+}
+`;
+
+exports[`Testing graphql resquest user QUERY user Testing user(userId: ID!) should fail getting a user by id because unknown id received 1`] = `
+Object {
+  "data": Object {
+    "user": null,
+  },
+}
+`;
+
+exports[`Testing graphql resquest user QUERY user Testing user(userId: ID!) should get a user by id 1`] = `
+Object {
+  "data": Object {
+    "user": Object {
+      "email": "benoit@schopfli.ch",
+      "firstname": "Benoît",
+      "lastname": "Schöpfli",
+    },
+  },
+}
+`;
+
+exports[`Testing graphql resquest user QUERY user Testing users() should get all users 1`] = `
+Object {
+  "data": Object {
+    "users": Array [
+      Object {
+        "email": "benoit@schopfli.ch",
+        "firstname": "Benoît",
+        "lastname": "Schöpfli",
+      },
+      Object {
+        "email": "antoine@rochaille.ch",
+        "firstname": "Antoine",
+        "lastname": "Rochaille",
+      },
+      Object {
+        "email": "paul@nta.ch",
+        "firstname": "Paul",
+        "lastname": "Ntawuruquelquechosedugenre",
+      },
+      Object {
+        "email": "miguel@santaclause.ch",
+        "firstname": "Miguel",
+        "lastname": "SantaClause",
+      },
+    ],
+  },
+}
+`;
