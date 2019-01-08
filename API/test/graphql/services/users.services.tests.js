@@ -4,7 +4,7 @@ const clearDB = require('../clearDB');
 let benoit;
 let antoine;
 
-let tabUsers = [benoit, antoine];
+let tabUsers;
 
 const clearAndPopulateDB = async() => {
   // ---------------------------------------- on supprime tout le contenu de la DB ----------------------------------------
@@ -17,9 +17,6 @@ const clearAndPopulateDB = async() => {
     lastname: 'Schöpfli',
     email: 'benoit@paysan.ch',
     password: '1234abcd',
-    image: 'ceci est une image encodée en base64!',
-    followingProducersIds: [],
-    emailValidated: false
   };
 
   antoine = {
@@ -27,9 +24,6 @@ const clearAndPopulateDB = async() => {
     lastname: 'Rochaille',
     email: 'antoine@paysan.ch',
     password: '1234abcd',
-    image: 'ceci est l\'image d\'un tueur encodée en base64!',
-    followingProducersIds: [],
-    emailValidated: false
   };
 
   // on ajoute 2 utilisateurs
@@ -51,16 +45,6 @@ describe('tests users services', () => {
       allUsers = allUsers.map(user => user.toObject());
       allUsers.should.be.an('array');
       allUsers.length.should.be.equal(2);
-
-      // pour chaque utilisateur, on test les éléments critiques
-      const promises = await allUsers.map(async(user, index) => {
-        user.id.should.be.eql(tabUsers[index].id);
-
-        // TODO: tester l'intérieur de subscription lorsqu'on pourra les gérer...!
-        user.followingProducersIds.should.be.not.null;
-        user.followingProducersIds.should.be.an('array');
-      });
-      await Promise.all(promises);
     });
   });
 
@@ -76,55 +60,35 @@ describe('tests users services', () => {
       user.lastname.should.be.equal(benoit.lastname);
       user.email.should.be.equal(benoit.email);
       user.password.should.be.equal(benoit.password);
-      user.image.should.be.equal(benoit.image);
-
-      // TODO: tester l'intérieur de subscription lorsqu'on pourra les gérer...!
-      user.followingProducersIds.should.be.an('array');
-      user.followingProducersIds.length.should.be.equal(benoit.followingProducersIds.length);
-
-      user.emailValidated.should.be.equal(benoit.emailValidated);
     });
 
     it('should fail getting one user because no id received', async() => {
       try {
         await usersServices.getUserById('');
       } catch (err) {
-        err.message.should.be.equal('Received user.id is invalid!');
+        err.message.should.be.equal('Cast to ObjectId failed for value "" at path "_id" for model "users"');
       }
     });
 
-    it('should fail getting one user because invalid id received', async() => {
+    it('should fail getting one user because invalid id received (too short)', async() => {
       try {
-        await usersServices.getUserById(benoit.id + benoit.id);
+        await usersServices.getUserById('abcdef');
       } catch (err) {
-        err.message.should.be.equal('Received user.id is invalid!');
+        err.message.should.be.equal('Cast to ObjectId failed for value "abcdef" at path "_id" for model "users"');
+      }
+    });
+
+    it('should fail getting one user because invalid id received (too long)', async() => {
+      try {
+        await usersServices.getUserById('abcdefabcdefabcdefabcdefabcdefabcdef');
+      } catch (err) {
+        err.message.should.be.equal('Cast to ObjectId failed for value "abcdefabcdefabcdefabcdefabcdefabcdef" at path "_id" for model "users"');
       }
     });
 
     it('should fail getting one user because unknown id received', async() => {
       const userGotInDB = await usersServices.getUserById('abcdefabcdefabcdefabcdef');
       expect(userGotInDB).to.be.null;
-    });
-  });
-
-  describe('tests getAllUsersInReceivedIdList', () => {
-    it('should get all users with id in received list', async() => {
-      // on récupère 2 utilisateurs
-      let users = await usersServices.getAllUsersInReceivedIdList([benoit.id, antoine.id]);
-      users.should.be.an('array');
-      users.length.should.be.equal(2);
-
-      // on récupère 1 seul utilisateur
-      users = await usersServices.getAllUsersInReceivedIdList([benoit.id]);
-      users.should.be.not.null;
-      users.should.be.an('array');
-      users.length.should.be.equal(1);
-
-      // on récupère aucun utilisateur
-      users = await usersServices.getAllUsersInReceivedIdList([]);
-      users.should.be.not.null;
-      users.should.be.an('array');
-      users.length.should.be.equal(0);
     });
   });
 
@@ -145,13 +109,6 @@ describe('tests users services', () => {
       addedUser.lastname.should.be.equal(benoit.lastname);
       addedUser.email.should.be.equal(benoit.email);
       addedUser.password.should.be.not.null;
-      addedUser.image.should.be.equal(benoit.image);
-
-      // TODO: tester l'intérieur de subscription lorsqu'on pourra les gérer...!
-      addedUser.followingProducersIds.should.be.an('array');
-      addedUser.followingProducersIds.length.should.be.equal(benoit.followingProducersIds.length);
-
-      addedUser.emailValidated.should.be.equal(benoit.emailValidated);
     });
 
     it('should fail adding a new user with an already used email', async() => {
@@ -270,13 +227,6 @@ describe('tests users services', () => {
       updatedUser.email.should.be.equal(antoine.email); // car l'email ne peut pas être modifié
       // on check que le password n'ait pas été modifié durant l'update!
       updatedUser.password.should.be.equal(password);
-      updatedUser.image.should.be.equal(user.image);
-
-      // TODO: tester l'intérieur de subscription lorsqu'on pourra les gérer...!
-      updatedUser.followingProducersIds.should.be.an('array');
-      updatedUser.followingProducersIds.length.should.be.equal(user.followingProducersIds.length);
-
-      updatedUser.emailValidated.should.be.equal(user.emailValidated);
     });
 
     it('should fail updating a user because no id received', async() => {
@@ -284,7 +234,7 @@ describe('tests users services', () => {
         benoit.id = '';
         await usersServices.updateUser(benoit);
       } catch (err) {
-        err.message.should.be.equal('Received user.id is invalid!');
+        err.message.should.be.equal('Cast to ObjectId failed for value "" at path "_id" for model "users"');
       }
     });
 
@@ -293,7 +243,7 @@ describe('tests users services', () => {
         benoit.id = '5c04561e7209e21e582750'; // id trop court (<24 caractères)
         await usersServices.updateUser(benoit);
       } catch (err) {
-        err.message.should.be.equal('Received user.id is invalid!');
+        err.message.should.be.equal('Cast to ObjectId failed for value "5c04561e7209e21e582750" at path "_id" for model "users"');
       }
     });
 
@@ -302,7 +252,7 @@ describe('tests users services', () => {
         benoit.id = '5c04561e7209e21e582750a35c04561e7209e21e582750a35c04561e7209e21e582750a3'; // id trop long (> 24 caractères)
         await usersServices.updateUser(benoit);
       } catch (err) {
-        err.message.should.be.equal('Received user.id is invalid!');
+        err.message.should.be.equal('Cast to ObjectId failed for value "5c04561e7209e21e582750a35c04561e7209e21e582750a35c04561e7209e21e582750a3" at path "_id" for model "users"');
       }
     });
 

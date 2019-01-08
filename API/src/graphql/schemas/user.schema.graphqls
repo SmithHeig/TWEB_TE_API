@@ -1,13 +1,19 @@
 type Query {
+	# Retourne tous les utilisateurs de la base de données.
 	users: [User!]!
+
+	# Retourne l'utilisateur correspondant au 'userId' reçu.
 	user(userId: ID!) : User
 
-	# Retourne true si l'email reçu en paramètre peut être utilisé pour inscrire un nouveau membre. Retourne false si l'email re4u en paramètre est déjà utilisé.
+	# Retourne true si l'email reçu en paramètre peut être utilisé pour inscrire un nouveau membre. Retourne false si l'email reçu en paramètre est déjà utilisé.
 	checkIfEmailIsAvailable(email: String!): Boolean!
 }
 
 type Mutation {
+	# Met à jour l'utilisateur correspondant à l'id reçu dans l'objet 'user' avec les informations également contenues dans l'objet 'user'.
 	updateUser(user: UserInputUpdate!): User
+
+	# Supprime le compte de l'utilisateur correspondant à 'userId'.
 	deleteUser(userId: ID!): User
 }
 

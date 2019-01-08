@@ -1,5 +1,5 @@
 type Mutation {
-    # Permet à un utilisateur ou un producteur enregistré de se connecter à son compte.
+    # Permet à un utilisateur inscrit de se connecter à son compte.
     login(email: String!, password: String!): Token!
 
     # Permet à un nouvel utilisateur de s'inscrire et se créer un compte.
