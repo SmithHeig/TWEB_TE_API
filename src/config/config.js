@@ -30,7 +30,7 @@ const config = {
       name: 'API'
     },
     port: process.env.PORT || 3000,
-    db: `mongodb://${process.env.MONGODB_HOST_PROD}:${process.env.MONGODB_PORT_PROD}/${process.env.MONGODB_DBNAME_PROD}`,
+    db: `mongodb+srv://${process.env.MONGODB_USER_PROD}:${process.env.MONGODB_PWD_PROD}@${process.env.MONGODB_SERVER_PROD}/test?retryWrites=true`,
     jwtSecret: process.env.JWT_SECRET
   }
 };

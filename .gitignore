@@ -1,6 +1,6 @@
 
-API/\.idea/
+.idea/
 
-API/node_modules/
+node_modules/
 
-API/\.env
+.env
