@@ -1,3 +1,7 @@
+/**
+ * DB Schema for the movies
+ * @type {*|Mongoose}
+ */
 const mongoose = require('mongoose');
 
 const options = {

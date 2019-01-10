@@ -6,6 +6,11 @@ const checkIfIsYourself = (idInContext, idInArgs) => (idInArgs === idInContext ?
   'You can\'t modify information of another user than yourself!'
 ));
 
+/**
+ * Check if the user is authenticated - Not usefull for this app
+ * @param idInContext
+ * @returns {boolean}
+ */
 const isAuthenticated = (idInContext) => {
   const result = checkIfIsAuthenticated(idInContext);
   if (result.message != null) {
@@ -14,6 +19,12 @@ const isAuthenticated = (idInContext) => {
   return true;
 };
 
+/**
+ * Check if is autheticated
+ * @param idInContext
+ * @param idInArgs
+ * @returns {boolean}
+ */
 const isAuthenticatedAndIsYourself = (idInContext, idInArgs) => {
   const resultAuthenticated = checkIfIsAuthenticated(idInContext);
   const resultYourself = checkIfIsYourself(idInContext, idInArgs);
