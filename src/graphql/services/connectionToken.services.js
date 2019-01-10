@@ -4,8 +4,11 @@ const config = require('../../config/config');
 
 async function login(email, password) {
   const user = await usersServices.getUserByLogin(email, password);
-
-  return createConnectionToken(user.id, user.email);
+  const userLogin = {
+    token: createConnectionToken(user.id, user.email),
+    user
+  }
+  return userLogin;
 }
 
 async function signUpAsUser(newUser) {
