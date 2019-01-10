@@ -5,6 +5,9 @@ type Query {
 	# Retourne l'utilisateur correspondant au 'userId' reçu.
 	user(userId: ID!) : User
 
+	# Retourne l'utilisateur correspondant au token reçu.
+	me(token: String!) : User
+
 	# Retourne true si l'email reçu en paramètre peut être utilisé pour inscrire un nouveau membre. Retourne false si l'email reçu en paramètre est déjà utilisé.
 	checkIfEmailIsAvailable(email: String!): Boolean!
 }
