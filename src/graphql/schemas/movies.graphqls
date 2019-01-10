@@ -1,6 +1,6 @@
 type Query {
 	# Retourne tous les films
-	movies: [Movie!]!
+	movies(first: Int, offset: Int): [Movie!]!
 }
 
 scalar Date
