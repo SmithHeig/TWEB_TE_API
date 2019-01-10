@@ -7,6 +7,8 @@ const usersResolvers = {
 
     user: (parent, args, context) => usersServices.getUserById(args.userId),
 
+    me: (parent, args, context) => usersServices.getUserByToken(args.token),
+
     checkIfEmailIsAvailable: (parent, args, context) => usersServices.isEmailAvailable(args.email)
   },
 

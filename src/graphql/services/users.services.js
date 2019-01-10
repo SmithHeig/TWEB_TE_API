@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const UsersModel = require('../models/users.modelgql');
 
@@ -8,6 +9,15 @@ function getUsers() {
 
 function getUserById(id) {
   return UsersModel.findById(id);
+}
+
+async function getUserByToken(token) {
+  const tokenContent = await jwt.decode(token);
+
+  if (tokenContent == null || tokenContent.id == null) {
+    return null;
+  }
+  return getUserById(tokenContent.id);
 }
 
 
@@ -86,6 +96,7 @@ function deleteUser(id) {
 module.exports = {
   getUsers,
   getUserById,
+  getUserByToken,
   getUserByLogin,
   isEmailAvailable,
   addUser,
