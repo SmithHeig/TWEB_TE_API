@@ -10,6 +10,7 @@ type Query {
 
 	# Retourne true si l'email reçu en paramètre peut être utilisé pour inscrire un nouveau membre. Retourne false si l'email reçu en paramètre est déjà utilisé.
 	checkIfEmailIsAvailable(email: String!): Boolean!
+
 }
 
 type Mutation {
@@ -18,6 +19,9 @@ type Mutation {
 
 	# Supprime le compte de l'utilisateur correspondant à 'userId'.
 	deleteUser(userId: ID!): User
+
+	# Ajoute une film à la watchlist
+	addMovieToWatchlist(userId: ID!, movieId: ID!): User!
 }
 
 type User {

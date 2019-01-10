@@ -92,6 +92,10 @@ async function updateUser({ id, firstname, lastname }) {
   return UsersModel.findByIdAndUpdate(id, userToUpdate, { new: true }); // retourne l'objet modifié
 }
 
+async function addMovieToWatchlist(userId, movieId) {
+  return UsersModel.findByIdAndUpdate(userId, { $addToSet: { watchlist: movieId } }, { new: true }); // retourne l'objet modifié
+}
+
 function deleteUser(id) {
   return UsersModel.findByIdAndRemove(id);
 }
@@ -104,5 +108,6 @@ module.exports = {
   isEmailAvailable,
   addUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  addMovieToWatchlist
 };

@@ -21,7 +21,9 @@ const usersResolvers = {
     deleteUser: async(parent, args, context) => {
       await isAuthenticatedAndIsYourself(context.id, args.userId);
       return usersServices.deleteUser(args.userId);
-    }
+    },
+
+    addMovieToWatchlist: (parent, args, context) => usersServices.addMovieToWatchlist(args.userId, args.movieId)
   },
   User: {
     watchlist: (parent, args, context) => moviesServices.getMovieInReceivedIdList(parent.watchlist)
