@@ -1,6 +1,6 @@
 const clearDB = require('./graphql/clearDB');
 const usersServices = require('../src/graphql/services/users.services');
-const postsServices = require('../src/graphql/services/posts.services');
+const postsServices = require('../src/graphql/services/movies.services');
 
 let tabUsers;
 let tabPosts;

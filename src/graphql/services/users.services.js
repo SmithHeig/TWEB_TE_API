@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const UsersModel = require('../models/users.modelgql');
+const config = require('../../config/config');
 
 function getUsers() {
   return UsersModel.find()
@@ -12,8 +13,7 @@ function getUserById(id) {
 }
 
 async function getUserByToken(token) {
-  const tokenContent = await jwt.decode(token);
-
+  const tokenContent = await jwt.verify(token, config.jwtSecret);
   if (tokenContent == null || tokenContent.id == null) {
     return null;
   }

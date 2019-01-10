@@ -1,0 +1,25 @@
+type Query {
+	# Retourne tous les films
+	movies: [Movie!]!
+}
+
+scalar Date
+
+# J'ai decidé de laisser le choix de ce que l'utilisateur veut récupéré
+type Movie {
+	id: ID!
+	vote_count: Int!
+	video: Boolean!
+	vote_average: Float!
+	title: String!
+	popularity: Float!
+	poster_path: String!
+	original_language: String!
+	original_title: String!
+	backdrop_path: String!
+	adult: Boolean!
+	overview: String!
+	release_date: Date!
+	tmdb_id: Int!
+	genre: [String]!
+}

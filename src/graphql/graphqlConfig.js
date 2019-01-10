@@ -4,13 +4,13 @@ const { fileLoader, mergeTypes } = require('merge-graphql-schemas');
 
 const User = require('./resolvers/users.resolvers');
 const TokenValidationEmail = require('./resolvers/tokens.resolvers');
-const Posts = require('./resolvers/posts.resolvers');
+const Movies = require('./resolvers/movies.resolvers');
 
 
 const resolvers = merge(
   User,
   TokenValidationEmail,
-  Posts
+  Movies
 );
 
 const typesArray = fileLoader(path.join(__dirname, './schemas'));
