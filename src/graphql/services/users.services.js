@@ -4,8 +4,10 @@ const UsersModel = require('../models/users.modelgql');
 const config = require('../../config/config');
 
 function getUsers() {
-  return UsersModel.find()
+  const users = UsersModel.find()
     .sort({ _id: 1 });
+  console.log(users);
+  return users;
 }
 
 function getUserById(id) {
@@ -59,12 +61,13 @@ function checkIfPasswordIsValid(password) {
   return true;
 }
 
-async function addUser({ firstname, lastname, email, password }) {
+async function addUser({ firstname, lastname, email, password, watchlist }) {
   if (await isEmailAvailable(email) && checkIfPasswordIsValid(password)) {
     const userToAdd = {
       firstname,
       lastname,
       email,
+      watchlist,
       password: await bcrypt.hash(password, 10)
     };
 

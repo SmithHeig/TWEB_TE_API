@@ -1,6 +1,6 @@
 const { isAuthenticatedAndIsYourself } = require('./authorization.resolvers');
 const usersServices = require('../services/users.services');
-
+const moviesServices = require('../services/movies.services');
 const usersResolvers = {
   Query: {
     users: (parent, args, context) => usersServices.getUsers(),
@@ -22,6 +22,9 @@ const usersResolvers = {
       await isAuthenticatedAndIsYourself(context.id, args.userId);
       return usersServices.deleteUser(args.userId);
     }
+  },
+  User: {
+    watchlist: (parent, args, context) => moviesServices.getMovieInReceivedIdList(parent.watchlist)
   }
 };
 module.exports = usersResolvers;

@@ -11,7 +11,7 @@ type Movie {
 	vote_count: Int!
 	video: Boolean!
 	vote_average: Float!
-	title: String!
+	title: String
 	popularity: Float!
 	poster_path: String!
 	original_language: String!

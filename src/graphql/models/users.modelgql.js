@@ -26,7 +26,13 @@ const userSchema = new mongoose.Schema(
     password: {
       type: mongoose.Schema.Types.String,
       required: true
-    }
+    },
+    watchlist: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'movies'
+      }
+    ],
   }, options
 );
 

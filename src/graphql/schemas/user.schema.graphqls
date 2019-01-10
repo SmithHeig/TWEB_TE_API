@@ -25,6 +25,7 @@ type User {
 	firstname: String!
 	lastname: String!
 	email: String!
+	watchlist: [Movie]
 }
 
 input UserInputAdd {

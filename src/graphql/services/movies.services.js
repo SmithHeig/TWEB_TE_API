@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const MoviesModel = require('../models/movies.modelgql');
 
 function getAllMovies(first, offset) {
@@ -20,6 +21,11 @@ function getAllMovies(first, offset) {
   }
 }
 
+function getMovieInReceivedIdList(list){
+  return MoviesModel.find({ _id: { $in: list } }).sort({ _id: 1 });
+}
+
 module.exports = {
   getAllMovies,
+  getMovieInReceivedIdList
 };
